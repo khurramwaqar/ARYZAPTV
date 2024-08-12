@@ -44,4 +44,5 @@ https://www.apache.org/licenses/LICENSE-2.0
     <string name="favorites_added_last_week">Added Last Week</string>
     <string name="favorites_available_in_4k">Available in 4K</string>
     <string name="favorites_unknown">Unknown filter</string>
+    <string name="default_web_client_id">834097533516-cenn77f8i2i8hlaiqnspotuhrsmrvsjl.apps.googleusercontent.com</string>
 </resources>

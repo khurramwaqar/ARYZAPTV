@@ -68,7 +68,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.ShapeDefaults
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 import com.google.jetstream.data.entities.Movie
 import com.google.jetstream.data.util.StringConstants
 import com.google.jetstream.presentation.theme.JetStreamBorderWidth

@@ -58,13 +58,14 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Tab
 import androidx.tv.material3.TabRow
 import androidx.tv.material3.Text
-import com.google.jetstream.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.jetstream.data.util.StringConstants
 import com.google.jetstream.presentation.screens.Screens
 import com.google.jetstream.presentation.theme.IconSize
 import com.google.jetstream.presentation.theme.JetStreamCardShape
 import com.google.jetstream.presentation.theme.LexendExa
 import com.google.jetstream.presentation.utils.occupyScreenSize
+import com.release.aryzaptv.R
 
 val TopBarTabs = Screens.values().toList().filter { it.isTabItem }
 
@@ -83,6 +84,8 @@ fun DashboardTopBar(
     onScreenSelection: (screen: Screens) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
+
+    var auth = FirebaseAuth.getInstance().currentUser
     Box(modifier = modifier) {
         Row(
             modifier = Modifier
@@ -176,7 +179,8 @@ fun DashboardTopBar(
                 selected = selectedTabIndex == PROFILE_SCREEN_INDEX,
                 onClick = {
                     onScreenSelection(Screens.Profile)
-                }
+                },
+                urlImage = auth?.photoUrl.toString()
             )
 
         }

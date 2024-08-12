@@ -62,7 +62,7 @@ import androidx.tv.material3.StandardCardLayout
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 import com.google.jetstream.data.models.Episode
 import com.google.jetstream.presentation.common.ItemDirection
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding

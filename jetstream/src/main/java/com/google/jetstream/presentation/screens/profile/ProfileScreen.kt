@@ -66,7 +66,7 @@ import androidx.tv.material3.ListItem
 import androidx.tv.material3.ListItemDefaults
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
 import com.google.jetstream.presentation.theme.JetStreamTheme
 
@@ -185,7 +185,7 @@ fun ProfileScreen(
             startDestination = ProfileScreens.Accounts(),
             builder = {
                 composable(ProfileScreens.Accounts()) {
-                    AccountsSection()
+                    AccountsSection( navController = profileNavController )
                 }
                 composable(ProfileScreens.About()) {
                     AboutSection()

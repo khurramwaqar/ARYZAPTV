@@ -45,6 +45,8 @@ enum class Screens(
     Dashboard,
     VideoPlayer,
     ZAPVideoPayer(listOf("userPath")),
+    Login,
+    Signup,
     ZHomeScreen;
 
     operator fun invoke(): String {

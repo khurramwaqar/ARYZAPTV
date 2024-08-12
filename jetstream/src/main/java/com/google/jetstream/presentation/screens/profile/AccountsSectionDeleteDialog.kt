@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 import com.google.jetstream.presentation.theme.JetStreamCardShape
 import com.google.jetstream.tvmaterial.StandardDialog
 

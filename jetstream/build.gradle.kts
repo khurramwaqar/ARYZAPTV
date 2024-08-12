@@ -21,19 +21,23 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    id("com.google.gms.google-services")
+    id("io.realm.kotlin")
 }
+
+apply(plugin = "com.google.gms.google-services")
 
 kotlin {
     jvmToolchain(17)
 }
 
 android {
-    namespace = "com.google.jetstream"
+    namespace = "com.release.aryzaptv"
     // Needed for latest androidx snapshot build
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.google.jetstream"
+        applicationId = "com.release.aryzaptv"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
@@ -142,5 +146,12 @@ dependencies {
     implementation ("androidx.media3:media3-ui:1.0.0")
     implementation ("androidx.media3:media3-extractor:1.0.0")
     implementation ("androidx.media3:media3-exoplayer-hls:1.0.0")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.0") // Use the latest version
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("io.realm.kotlin:library-base:1.11.0")
+
 
 }

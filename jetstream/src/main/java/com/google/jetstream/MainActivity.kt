@@ -1,8 +1,12 @@
 package com.google.jetstream
 
+import LoginScreen
+import SignupScreen
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -22,26 +27,36 @@ import androidx.navigation.navArgument
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
-import com.google.jetstream.data.models.Series
-import com.google.jetstream.data.models.SeriesSingle
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
+import com.google.firebase.app
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.jetstream.presentation.screens.Screens
 import com.google.jetstream.presentation.screens.categories.CategoryMovieListScreen
 import com.google.jetstream.presentation.screens.dashboard.DashboardScreen
 import com.google.jetstream.presentation.screens.movies.MovieDetailsScreen
 import com.google.jetstream.presentation.screens.movies.SeriesDetailScreen
-import com.google.jetstream.presentation.screens.series.SDetailsScreen
 //import com.google.jetstream.presentation.screens.series.SeriesDetailsScreen
 import com.google.jetstream.presentation.screens.videoPlayer.VideoPlayerScreen
 import com.google.jetstream.presentation.screens.videoPlayer.ZAPVideoPlayerScreen
 import com.google.jetstream.presentation.theme.JetStreamTheme
 import dagger.hilt.android.AndroidEntryPoint
+import handleGoogleSignInResult
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    lateinit var auth: FirebaseAuth
+    lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this@MainActivity)
 
+
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
         setContent {
             App()
         }
@@ -65,7 +80,7 @@ private fun MainActivity.App() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = Screens.Dashboard(),
+                    startDestination = Screens.Login(),
                     builder = {
                         composable(
                             route = Screens.CategoryMovieList(),
@@ -201,6 +216,32 @@ private fun MainActivity.App() {
                                         isComingBackFromDifferentScreen = true
                                     }
                                 }
+                            )
+                        }
+                        composable(route = Screens.Login()) {
+                            LoginScreen(
+                                onLoginSuccess = {
+                                    navController.navigate(Screens.Dashboard()) {
+                                        popUpTo(Screens.Login()) { inclusive = true }
+                                    }
+                                },
+                                onNavigateToSignup = {
+                                    navController.navigate(Screens.Signup())
+                                },
+                                appContext = applicationContext
+                            )
+                        }
+                        composable(route = Screens.Signup()) {
+                            SignupScreen(
+                                onSignupSuccess = {
+                                    navController.navigate(Screens.Dashboard()) {
+                                        popUpTo(Screens.Signup()) { inclusive = true }
+                                    }
+                                },
+                                onNavigateToLogin = {
+                                    navController.navigate(Screens.Login())
+                                },
+                                appContext = applicationContext
                             )
                         }
                     }

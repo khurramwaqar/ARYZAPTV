@@ -45,7 +45,7 @@ import androidx.tv.material3.ClassicCard
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 import com.google.jetstream.data.entities.MovieCast
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
 import com.google.jetstream.presentation.theme.JetStreamBorderWidth

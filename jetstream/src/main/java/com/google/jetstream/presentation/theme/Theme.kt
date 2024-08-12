@@ -21,7 +21,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.darkColorScheme
-import com.google.jetstream.R
+import com.release.aryzaptv.R
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 private val darkColorScheme @Composable get() = darkColorScheme(

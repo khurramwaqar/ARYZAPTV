@@ -17,6 +17,8 @@
 package com.google.jetstream
 
 import android.app.Application
+import android.widget.Toast
+import com.google.firebase.FirebaseApp
 import com.google.jetstream.data.repositories.MovieRepository
 import com.google.jetstream.data.repositories.MovieRepositoryImpl
 import dagger.Binds
@@ -26,7 +28,14 @@ import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.components.SingletonComponent
 
 @HiltAndroidApp
-class JetStreamApplication : Application()
+class JetStreamApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        // Initialize Firebase
+        var app = FirebaseApp.initializeApp(this@JetStreamApplication)
+        Toast.makeText(this, app?.name.toString() , Toast.LENGTH_SHORT).show()
+    }
+}
 
 @InstallIn(SingletonComponent::class)
 @Module

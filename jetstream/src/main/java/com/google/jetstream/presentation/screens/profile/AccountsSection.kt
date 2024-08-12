@@ -27,9 +27,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.core.app.NavUtils
+import androidx.navigation.NavController
 import androidx.tv.foundation.lazy.grid.TvGridCells
 import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
+import com.google.android.gms.auth.api.Auth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.jetstream.MainActivity
 import com.google.jetstream.data.util.StringConstants
+import com.google.jetstream.presentation.screens.Screens
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
 
 @Immutable
@@ -40,33 +46,41 @@ data class AccountsSectionData(
 )
 
 @Composable
-fun AccountsSection() {
+fun AccountsSection(
+    navController: NavController
+) {
     val childPadding = rememberChildPadding()
     var showDeleteDialog by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
+    val auth = FirebaseAuth.getInstance()
+
     val accountsSectionListItems = remember {
         listOf(
             AccountsSectionData(
                 title = StringConstants.Composable.Placeholders
                     .AccountsSelectionSwitchAccountsTitle,
-                value = StringConstants.Composable.Placeholders.AccountsSelectionSwitchAccountsEmail
+                value = if(auth.currentUser?.isAnonymous == false)  auth.currentUser?.email.toString() else StringConstants.Composable.Placeholders.AccountsSelectionSwitchAccountsEmail
             ),
             AccountsSectionData(
+                onClick = {
+                    logoutAndNavigateToLogin(auth, navController)
+
+                },
                 title = StringConstants.Composable.Placeholders.AccountsSelectionLogOut,
-                value = StringConstants.Composable.Placeholders.AccountsSelectionSwitchAccountsEmail
+                value = if(auth.currentUser?.isAnonymous == false)  auth.currentUser?.email.toString() else StringConstants.Composable.Placeholders.AccountsSelectionSwitchAccountsEmail
             ),
             AccountsSectionData(
                 title = StringConstants.Composable.Placeholders
                     .AccountsSelectionChangePasswordTitle,
                 value = StringConstants.Composable.Placeholders.AccountsSelectionChangePasswordValue
             ),
-            AccountsSectionData(
-                title = StringConstants.Composable.Placeholders.AccountsSelectionAddNewAccountTitle,
-            ),
-            AccountsSectionData(
-                title = StringConstants.Composable.Placeholders
-                    .AccountsSelectionViewSubscriptionsTitle
-            ),
+//            AccountsSectionData(
+//                title = StringConstants.Composable.Placeholders.AccountsSelectionAddNewAccountTitle,
+//            ),
+//            AccountsSectionData(
+//                title = StringConstants.Composable.Placeholders
+//                    .AccountsSelectionViewSubscriptionsTitle
+//            ),
             AccountsSectionData(
                 title = StringConstants.Composable.Placeholders.AccountsSelectionDeleteAccountTitle,
                 onClick = { showDeleteDialog = true }
@@ -94,4 +108,9 @@ fun AccountsSection() {
         showDialog = showDeleteDialog,
         onDismissRequest = { showDeleteDialog = false }
     )
+}
+
+fun logoutAndNavigateToLogin(auth: FirebaseAuth, navController: NavController) {
+    //auth.signOut()
+    navController.navigate(Screens.Dashboard())
 }

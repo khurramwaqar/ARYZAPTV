@@ -1,0 +1,133 @@
+{
+  "project_info": {
+    "project_number": "834097533516",
+    "firebase_url": "https://ary-zap-5b32f.firebaseio.com",
+    "project_id": "ary-zap-5b32f",
+    "storage_bucket": "ary-zap-5b32f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834097533516:android:27d443fca058aa29fd9ae9",
+        "android_client_info": {
+          "package_name": "com.release.arylive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834097533516-ialjldg9ei0u26vm6qo7regujv5c4lct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.arylive",
+            "certificate_hash": "8f2ba6e15262fcb5eba1debdb58ad5e40297bdb6"
+          }
+        },
+        {
+          "client_id": "834097533516-t1bv31mpm5rcef5hesog8ravl7r427tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.arylive",
+            "certificate_hash": "f3549ef7b606a3d1c824cb5157464e52d1604abf"
+          }
+        },
+        {
+          "client_id": "834097533516-cenn77f8i2i8hlaiqnspotuhrsmrvsjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl_plTbBPVVkpEc6iRZEeAfVGwTfj5mJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834097533516-cenn77f8i2i8hlaiqnspotuhrsmrvsjl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "834097533516-1cqvbspic7dv2rmlvisjio0avbs5836t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.release.arylive",
+                "app_store_id": "1475260911"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834097533516:android:a16517993437c343fd9ae9",
+        "android_client_info": {
+          "package_name": "com.release.aryzaptv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834097533516-fmoun9e4usf5vgdduf2018utknu65dkk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.aryzaptv",
+            "certificate_hash": "5f5ad1926aff556751dfd9e931486098e7f51280"
+          }
+        },
+        {
+          "client_id": "834097533516-m3u4rl4rf7laskr767898v8902n5r0l4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.aryzaptv",
+            "certificate_hash": "f0b9ad4042373ad4f8b4f7710d543953be7c1901"
+          }
+        },
+        {
+          "client_id": "834097533516-mfuqvv2gf8rm4t7ki3q0hvel53mm2033.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.aryzaptv",
+            "certificate_hash": "b3b83f8ae104b4c6440421cf3fb66348f35db96a"
+          }
+        },
+        {
+          "client_id": "834097533516-p26snc6v511pajd2nm3qh72nhp5vn15l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.release.aryzaptv",
+            "certificate_hash": "16ef8cb894b85acabe260889b172240f3ff90b77"
+          }
+        },
+        {
+          "client_id": "834097533516-cenn77f8i2i8hlaiqnspotuhrsmrvsjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl_plTbBPVVkpEc6iRZEeAfVGwTfj5mJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834097533516-cenn77f8i2i8hlaiqnspotuhrsmrvsjl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "834097533516-1cqvbspic7dv2rmlvisjio0avbs5836t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.release.arylive",
+                "app_store_id": "1475260911"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

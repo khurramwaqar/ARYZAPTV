@@ -27,7 +27,9 @@ import androidx.tv.foundation.lazy.list.rememberTvLazyListState
 import com.google.jetstream.data.models.Episode
 import com.google.jetstream.data.models.HomeDatum
 import com.google.jetstream.data.models.Series
+import com.google.jetstream.presentation.common.LiveSeriesROW
 import com.google.jetstream.presentation.common.SexySeriesCarousel
+import com.google.jetstream.presentation.common.SingleEPRow
 import com.google.jetstream.presentation.common.ZNMoviesRow
 import com.google.jetstream.presentation.screens.home.SingleSeriesCarousel
 import com.google.jetstream.presentation.screens.home.ZFeaturedSlider
@@ -120,12 +122,29 @@ private fun Catalog(
                     onMovieClick = onSeriesClick
                 )
             }
-            if (data.type == "Category" && data.name != "LATEST FROM ARYZAP" && data.name != "SHOWS" ){
+            if (data.type == "Category" && data.name != "LIVE STREAMS" && data.name != "LATEST FROM ARYZAP" && data.name != "SHOWS" ){
                 data.data.series?.let {
                     ZNMoviesRow(
-                        modifier = Modifier.padding(top = 10.dp).onFocusChanged {
-                            immersiveListHasFocus = it.hasFocus
-                        },
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .onFocusChanged {
+                                immersiveListHasFocus = it.hasFocus
+                            },
+                        movies = data.data.series,
+                        title = data.name,
+                        onMovieClick = onSeriesClick
+                    )
+                }
+            }
+
+            if (data.type == "Category" && data.name == "LIVE STREAMS" ){
+                data.data.series?.let {
+                    LiveSeriesROW(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .onFocusChanged {
+                                immersiveListHasFocus = it.hasFocus
+                            },
                         movies = data.data.series,
                         title = data.name,
                         onMovieClick = onSeriesClick
@@ -134,14 +153,24 @@ private fun Catalog(
             }
 
             if (data.type == "SingleSeries"){
-                SingleSeriesCarousel(
-                    modifier = Modifier.onFocusChanged {
-                        immersiveListHasFocus = it.hasFocus
-                    },
-                    moviesState = data.data.episode!!,
-                    onMovieClick = onEpisodeClick,
-                    titleHeader = data.name.toString()
+                SingleEPRow(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .onFocusChanged {
+                            immersiveListHasFocus = it.hasFocus
+                        },
+                    movies = data.data.episode!!,
+                    title = data.name,
+                    onMovieClick = onEpisodeClick
                 )
+//                SingleSeriesCarousel(
+//                    modifier = Modifier.onFocusChanged {
+//                        immersiveListHasFocus = it.hasFocus
+//                    },
+//                    moviesState = data.data.episode!!,
+//                    onMovieClick = onEpisodeClick,
+//                    titleHeader = data.name.toString()
+//                )
             }
         }
     }

@@ -16,6 +16,7 @@
 
 package com.google.jetstream.presentation.screens.dashboard
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ExperimentalTvMaterial3Api
@@ -31,6 +33,8 @@ import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.ToggleableSurfaceDefaults
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.google.jetstream.presentation.theme.JetStreamBorderWidth
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -38,7 +42,8 @@ import com.google.jetstream.presentation.theme.JetStreamBorderWidth
 fun UserAvatar(
     selected: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    urlImage: String
 ) {
     Surface(
         shape = ToggleableSurfaceDefaults.shape(shape = CircleShape),
@@ -63,10 +68,27 @@ fun UserAvatar(
         checked = selected,
         onCheckedChange = { onClick() }
     ) {
-        Icon(
-            imageVector = Icons.Default.AccountCircle,
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-        )
+
+        if(urlImage == null){
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+            )
+        }else{
+
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .crossfade(true)
+                    .data(urlImage)
+                    .build(),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                // Optionally, you can add contentScale to handle image scaling
+                // contentScale = ContentScale.Crop
+            )
+        }
+
+
     }
 }
