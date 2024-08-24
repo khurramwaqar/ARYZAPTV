@@ -1,5 +1,6 @@
 package com.google.jetstream
 
+import Favorites
 import LoginScreen
 import SignupScreen
 import android.os.Bundle
@@ -35,6 +36,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.jetstream.presentation.screens.Screens
 import com.google.jetstream.presentation.screens.categories.CategoryMovieListScreen
+import com.google.jetstream.presentation.screens.categories.ZCategoryMovieListScreen
 import com.google.jetstream.presentation.screens.dashboard.DashboardScreen
 import com.google.jetstream.presentation.screens.movies.MovieDetailsScreen
 import com.google.jetstream.presentation.screens.movies.SeriesDetailScreen
@@ -44,19 +46,22 @@ import com.google.jetstream.presentation.screens.videoPlayer.ZAPVideoPlayerScree
 import com.google.jetstream.presentation.theme.JetStreamTheme
 import dagger.hilt.android.AndroidEntryPoint
 import handleGoogleSignInResult
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var googleSignInClient: GoogleSignInClient
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this@MainActivity)
-
-
         Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        val config = RealmConfiguration.Builder(
+            schema = setOf(Favorites::class)
+        ).name("myFavDb.realm").build()
+        Realm.open(config)
         setContent {
             App()
         }
@@ -90,7 +95,7 @@ private fun MainActivity.App() {
                                 }
                             )
                         ) {
-                            CategoryMovieListScreen(
+                            ZCategoryMovieListScreen(
                                 onBackPressed = {
                                     if (navController.navigateUp()) {
                                         isComingBackFromDifferentScreen = true

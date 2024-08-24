@@ -16,6 +16,8 @@
 
 package com.google.jetstream.presentation.screens.series
 
+import Favorites
+import SeriesList
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,6 +29,7 @@ import com.google.jetstream.data.models.ModelEpisode
 import com.google.jetstream.data.models.Series
 import com.google.jetstream.data.models.SeriesSingle
 import com.google.jetstream.data.network.RetrofitClient
+import com.google.jetstream.data.repositories.FavoritesRepository
 import com.google.jetstream.data.repositories.MovieRepository
 import com.google.jetstream.presentation.screens.movies.SeriesDetailScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,6 +67,8 @@ class SeriesDetailsScreenViewModel @Inject constructor(private val savedStateHan
             }
         }
     }
+
+
 }
 
 data class CombineSeriesAndEpisode(

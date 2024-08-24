@@ -16,6 +16,8 @@
 
 package com.google.jetstream.presentation.screens.movies
 
+import Favorites
+import SeriesList
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
@@ -34,6 +36,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -56,6 +59,7 @@ import androidx.tv.material3.ClickableSurfaceBorder
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.OutlinedButton
 import androidx.tv.material3.Text
 import com.release.aryzaptv.R
 import com.google.jetstream.data.entities.Movie
@@ -63,6 +67,7 @@ import com.google.jetstream.data.entities.MovieDetails
 import com.google.jetstream.data.models.Episode
 import com.google.jetstream.data.models.Series
 import com.google.jetstream.data.models.SeriesSingle
+import com.google.jetstream.data.repositories.FavoritesRepository
 import com.google.jetstream.data.util.StringConstants
 import com.google.jetstream.presentation.common.MoviesRow
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
@@ -83,6 +88,7 @@ fun SeriesDetailScreen(
     //refreshScreenWithNewMovie: (Series) -> Unit,
     seriesDetailsScreenViewModel: SeriesDetailsScreenViewModel = hiltViewModel(),
     navController: NavController
+
 ) {
 
 
@@ -138,6 +144,27 @@ private fun SeriesDetail(
                 navController = navController
             )
         }
+//        item{
+//            // Add the "Add to Favorite" button
+//            val seriesList: SeriesList
+//            Spacer(modifier = Modifier.height(16.dp)) // Add some spacing before the button
+//            OutlinedButton(
+//                onClick = {
+//                    // Handle the favorite action
+//                    val favorite = Favorites().apply {
+//                        userId = "exampleUserId" // Replace with actual user ID
+//                        seriedId = listOf(seriesDetails.series) // Add the series to the favorites
+//                    }
+//                    // Save to favorites using the repository
+//                    LaunchedEffect(Unit) {
+//                        favoritesRepository.addOrUpdateFavorite(favorite)
+//                    }
+//                },
+//                modifier = Modifier.padding(horizontal = childPadding.start)
+//            ) {
+//                Text(text = "Add to Favorite")
+//            }
+//        }
         if(seriesDetails.details.episode.isNotEmpty()){
             item {
                 SeriesEpisode(seriesDetails = seriesDetails,

@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -53,33 +54,40 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.StandardCardLayout
 import androidx.tv.material3.Text
 import com.google.jetstream.data.entities.MovieCategoryList
+import com.google.jetstream.data.models.ModelCategories
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
 import com.google.jetstream.presentation.theme.JetStreamBorderWidth
 import com.google.jetstream.presentation.theme.JetStreamCardShape
 import com.google.jetstream.presentation.utils.GradientBg
 
 @Composable
-fun CategoriesScreen(
+fun ZCategoriesScreen(
     gridColumns: Int = 4,
     onCategoryClick: (categoryId: String) -> Unit,
     onScroll: (isTopBarVisible: Boolean) -> Unit,
-    categoriesScreenViewModel: CategoriesScreenViewModel = hiltViewModel()
+    categoriesScreenViewModel: ZCategoriesScreenViewModel = hiltViewModel()
 ) {
 
-    val uiState by categoriesScreenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by categoriesScreenViewModel.uiState.observeAsState(ZCategoriesScreenUiState.Loading)
 
-    when (val s = uiState) {
-        is CategoriesScreenUiState.Loading -> {
-            Loading()
-        }
-        is CategoriesScreenUiState.Ready -> {
+    when (uiState) {
+
+        is ZCategoriesScreenUiState.Ready -> {
+            val categories = (uiState as ZCategoriesScreenUiState.Ready).categoryList
             Catalog(
                 gridColumns = gridColumns,
-                movieCategories = s.categoryList,
+                movieCategories = categories,
                 onCategoryClick = onCategoryClick,
                 onScroll = onScroll,
                 modifier = Modifier.fillMaxSize()
             )
+        }
+        is ZCategoriesScreenUiState.Loading -> {
+            Loading()
+        }
+        is ZCategoriesScreenUiState.Error -> Error()
+        else -> {
+            androidx.compose.material.Text(text = "Error")
         }
     }
 
@@ -88,7 +96,7 @@ fun CategoriesScreen(
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
 private fun Catalog(
-    movieCategories: MovieCategoryList,
+    movieCategories: List<ModelCategories>,
     modifier: Modifier = Modifier,
     gridColumns: Int = 4,
     onCategoryClick: (categoryId: String) -> Unit,
@@ -141,7 +149,7 @@ private fun Catalog(
                                     )
                                 ),
                                 scale = CardDefaults.scale(focusedScale = 1f),
-                                onClick = { onCategoryClick(movieCategory.id) },
+                                onClick = { onCategoryClick(movieCategory.title) },
                                 interactionSource = it
                             ) {
                                 val itemAlpha by animateFloatAsState(
@@ -154,7 +162,7 @@ private fun Catalog(
                                         GradientBg()
                                     }
                                     Text(
-                                        text = movieCategory.name,
+                                        text = movieCategory.title,
                                         style = MaterialTheme.typography.titleMedium.copy(
                                             color = textColor,
                                         )

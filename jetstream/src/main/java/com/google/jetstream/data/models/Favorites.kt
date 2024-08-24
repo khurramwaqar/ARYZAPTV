@@ -1,8 +1,11 @@
+import com.google.jetstream.data.models.SeriesSingle
 import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.Ignore
 
 class Favorites : RealmObject {
-
+    @Ignore
     var userId: String? = ""
+    @Ignore
     var seriedId: List<SeriesList>? = null
 
 }
@@ -11,6 +14,7 @@ class SeriesList : RealmObject {
     var _id: String? = ""
     var title: String? = ""
     var description: String? = ""
+    @Ignore
     var cast: List<String>? = null
     var seriesDM: String? = ""
     var seriesYT: String? = ""

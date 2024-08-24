@@ -58,6 +58,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.jetstream.presentation.screens.Screens
 import com.google.jetstream.presentation.screens.categories.CategoriesScreen
+import com.google.jetstream.presentation.screens.categories.ZCategoriesScreen
 import com.google.jetstream.presentation.screens.favourites.FavouritesScreen
 import com.google.jetstream.presentation.screens.movies.MoviesScreen
 import com.google.jetstream.presentation.screens.profile.ProfileScreen
@@ -262,7 +263,7 @@ private fun Body(
 //        }
 
         composable(Screens.Categories()) {
-            CategoriesScreen(
+            ZCategoriesScreen(
                 onCategoryClick = openCategoryMovieList,
                 onScroll = updateTopBarVisibility
             )
