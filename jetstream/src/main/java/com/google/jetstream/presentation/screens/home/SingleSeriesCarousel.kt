@@ -100,7 +100,7 @@ fun SingleSeriesCarousel(
                 }
 
                 Crossfade(
-                    targetState = movie.snippet.thumbnails.high.url,
+                    targetState = movie.imagePath,
                     label = "posterUriCrossfade"
                 ) { posterUri ->
                     AsyncImage(
@@ -132,11 +132,11 @@ fun SingleSeriesCarousel(
                             bottom = 32.dp
                         )
                     ) {
-                        Text(text = movie.snippet.title, style = MaterialTheme.typography.displaySmall)
+                        Text(text = movie.title, style = MaterialTheme.typography.displaySmall)
                         Spacer(modifier = Modifier.padding(top = 8.dp))
                         Text(
                             modifier = Modifier.fillMaxWidth(0.5f),
-                            text = movie.snippet.title,
+                            text = movie.title,
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
                             fontWeight = FontWeight.Light
@@ -356,9 +356,9 @@ private fun MoviesRowItemImageSSC(
                 },
             model = ImageRequest.Builder(LocalContext.current)
                 .crossfade(true)
-                .data(movie.snippet.thumbnails.medium.url)
+                .data(movie.imagePath)
                 .build(),
-            contentDescription = "movie poster of ${movie.snippet.title}",
+            contentDescription = "movie poster of ${movie.title}",
             contentScale = ContentScale.Crop
         )
         if (showIndexOverImage) {
@@ -392,7 +392,7 @@ private fun MoviesRowItemTextSSC(
             label = "",
         )
         Text(
-            text = movie.snippet.title,
+            text = movie.title,
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.SemiBold
             ),

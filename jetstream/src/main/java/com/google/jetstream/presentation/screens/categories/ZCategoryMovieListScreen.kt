@@ -54,6 +54,8 @@ import coil.request.ImageRequest
 import com.google.jetstream.data.entities.Movie
 import com.google.jetstream.data.entities.MovieCategoryDetails
 import com.google.jetstream.data.models.ModelSeriesByCatTitle
+import com.google.jetstream.data.models.Series
+import com.google.jetstream.data.models.SeriesN
 import com.google.jetstream.data.util.StringConstants
 import com.google.jetstream.presentation.screens.dashboard.rememberChildPadding
 import com.google.jetstream.presentation.theme.JetStreamBorderWidth
@@ -68,7 +70,8 @@ object ZCategoryMovieListScreen {
 @Composable
 fun ZCategoryMovieListScreen(
     onBackPressed: () -> Unit,
-    onMovieSelected: (Movie) -> Unit,
+    onMovieSelected: (SeriesN) -> Unit,
+    onLiveSelected: (SeriesN) -> Unit,
     categoryMovieListScreenViewModel: ZCategoryMovieListScreenViewModel = hiltViewModel()
 ) {
     val uiState by categoryMovieListScreenViewModel.uiState.observeAsState(ZCategoryMovieListScreenUiState.Loading)
@@ -87,7 +90,8 @@ fun ZCategoryMovieListScreen(
                 mainTitle = title,
                 categoryDetails = categoryDetails,
                 onBackPressed = onBackPressed,
-                onMovieSelected = onMovieSelected
+                onMovieSelected = onMovieSelected,
+                onLiveSelected = onLiveSelected
             )
         }
     }
@@ -100,7 +104,8 @@ private fun CategoryDetails(
     mainTitle: String,
     categoryDetails: ModelSeriesByCatTitle,
     onBackPressed: () -> Unit,
-    onMovieSelected: (Movie) -> Unit,
+    onMovieSelected: (SeriesN) -> Unit,
+    onLiveSelected: (SeriesN) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val childPadding = rememberChildPadding()
@@ -156,7 +161,15 @@ private fun CategoryDetails(
                                         ),
                                     ),
                                     scale = CardDefaults.scale(focusedScale = 1f),
-                                    onClick = { Log.d("logDataScreen", movie.imagePoster.toString()) },
+                                    onClick = {
+                                              if(movie.seriesType == "show"){
+                                                  onMovieSelected(movie)
+                                              }else if(movie.seriesType == "programs"){
+                                                  onMovieSelected(movie)
+                                              }else if(movie.seriesType == "live"){
+                                                  onLiveSelected(movie)
+                                              }
+                                    },
                                     interactionSource = it
                                 ) {
                                     AsyncImage(

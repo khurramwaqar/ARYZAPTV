@@ -1,6 +1,7 @@
 package com.google.jetstream.presentation.screens.videoPlayer
 
 import android.net.Uri
+import android.util.Log
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import androidx.activity.compose.BackHandler
@@ -27,6 +28,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import com.google.gson.Gson
+import com.google.jetstream.data.models.SeriesN
 import com.google.jetstream.presentation.screens.videoPlayer.components.VideoPlayerControls
 import com.google.jetstream.presentation.screens.videoPlayer.components.rememberVideoPlayerState
 import com.google.jetstream.presentation.utils.handleDPadKeyEvents
@@ -36,6 +39,7 @@ import kotlinx.coroutines.launch
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 @Composable
 fun VideoPlayerScreen(
+    seriesJson: String?,
     mediaUri: Uri = Uri.parse("https://vod.aryzap.com/be8170a0vodtranssgp1313565080/369a456d3270835009874892463/adp.1443317.m3u8?bkreg=IND"),
     onBackPressed: () -> Unit,
 ) {
@@ -43,7 +47,7 @@ fun VideoPlayerScreen(
     val context = LocalContext.current
     var contentCurrentPosition: Long by remember { mutableStateOf(0L) }
     val videoPlayerState = rememberVideoPlayerState(hideSeconds = 4)
-
+    val series = Gson().fromJson(seriesJson, SeriesN::class.java)
     val exoPlayer = remember {
         ExoPlayer.Builder(context).build().apply {
             val defaultDataSourceFactory = DefaultDataSource.Factory(context)
@@ -56,6 +60,7 @@ fun VideoPlayerScreen(
 
             setMediaSource(source)
             prepare()
+            Log.d("dataVC", seriesJson.toString())
         }
     }
 

@@ -84,7 +84,7 @@ fun SeriesEpisode(
             seriesDetails.details.episode.forEach { episode ->
                 Surface(    
                     onClick = {
-                        navController.navigate(Screens.VideoPlayer.withArgs(""))
+                        navController.navigate(Screens.YTWebView.withArgs("${episode.videoYtId}"))
                     },
                     tonalElevation = 1.dp,
                     modifier = Modifier
@@ -134,32 +134,32 @@ fun SeriesEpisode(
 
                                     model = ImageRequest.Builder(LocalContext.current)
                                         .crossfade(true)
-                                        .data(episode.snippet.thumbnails.medium.url)
+                                        .data(episode.imagePath)
                                         .build(),
-                                    contentDescription = "movie poster of ${episode.snippet.title}",
+                                    contentDescription = "movie poster of ${episode.title}",
                                     contentScale = ContentScale.FillWidth)
                             }
                             Column(
                                 modifier = Modifier.padding(start = 16.dp)
                             ) {
                                 Text(
-                                    text = episode.snippet.title,
+                                    text = episode.title,
                                     style = MaterialTheme.typography.titleMedium
                                 )
-                                Text(
-                                    text = StringConstants
-                                        .Composable
-                                        .reviewCount(episode.snippet.channelId),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.alpha(0.75f)
-                                )
+//                                Text(
+//                                    text = StringConstants
+//                                        .Composable
+//                                        .reviewCount(episode.channelId),
+//                                    style = MaterialTheme.typography.titleMedium,
+//                                    modifier = Modifier.alpha(0.75f)
+//                                )
                             }
                         }
-                        Text(
-                            text = episode.snippet.channelTitle,
-                            style = MaterialTheme.typography.headlineLarge,
-                            modifier = Modifier.padding(end = 16.dp)
-                        )
+//                        Text(
+//                            text = episode.snippet.channelTitle,
+//                            style = MaterialTheme.typography.headlineLarge,
+//                            modifier = Modifier.padding(end = 16.dp)
+//                        )
                     }
                 }
             }

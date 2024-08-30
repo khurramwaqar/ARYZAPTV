@@ -42,6 +42,7 @@ import com.google.jetstream.presentation.screens.movies.MovieDetailsScreen
 import com.google.jetstream.presentation.screens.movies.SeriesDetailScreen
 //import com.google.jetstream.presentation.screens.series.SeriesDetailsScreen
 import com.google.jetstream.presentation.screens.videoPlayer.VideoPlayerScreen
+import com.google.jetstream.presentation.screens.videoPlayer.YouTubeWebViewScreen
 import com.google.jetstream.presentation.screens.videoPlayer.ZAPVideoPlayerScreen
 import com.google.jetstream.presentation.theme.JetStreamTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -101,9 +102,14 @@ private fun MainActivity.App() {
                                         isComingBackFromDifferentScreen = true
                                     }
                                 },
-                                onMovieSelected = { movie ->
+                                onMovieSelected = { series ->
                                     navController.navigate(
-                                        Screens.MovieDetails.withArgs(movie.id)
+                                        Screens.SeriesDetails.withArgs(series.id)
+                                    )
+                                },
+                                onLiveSelected = { series ->
+                                    navController.navigate(
+                                        Screens.ZAPVideoPayer.withArgs(series.id)
                                     )
                                 }
                             )
@@ -194,16 +200,17 @@ private fun MainActivity.App() {
                             )
                         }
                         composable(
-                            route = "${Screens.ZAPVideoPayer.withArgs("uriPath")}",
+                            route = Screens.ZAPVideoPayer(),
                             arguments = listOf(
-                                navArgument("uripath") {
+                                navArgument(ZAPVideoPlayerScreen.ZPlayerBundleId) {
                                     type = NavType.StringType
-                                }
+                                    nullable = true
+                                },
                             )
+
                         ) {
-                            val uripath = it.arguments?.getString("uripath")
+                            val detail = it.arguments?.getString(ZAPVideoPlayerScreen.ZPlayerBundleId)
                             ZAPVideoPlayerScreen(
-                                uripath = uripath,
                                 onBackPressed = {
                                     if (navController.navigateUp()) {
                                         isComingBackFromDifferentScreen = true
@@ -212,10 +219,17 @@ private fun MainActivity.App() {
                             )
                         }
                         composable(
-                            route = Screens.VideoPlayer()
+                            route = Screens.VideoPlayer(),
+                            arguments = listOf(
+                                navArgument("seriesJson") {
+                                    type = NavType.StringType
+                                    nullable = true
+                                }
+                            )
                         ) {
-
+                            val seriesJson2 = it.arguments?.getString("seriesJson")
                             VideoPlayerScreen(
+                                seriesJson = seriesJson2,
                                 onBackPressed = {
                                     if (navController.navigateUp()) {
                                         isComingBackFromDifferentScreen = true
@@ -249,6 +263,18 @@ private fun MainActivity.App() {
                                 appContext = applicationContext
                             )
                         }
+                        composable(
+                            route = Screens.YTWebView(),
+                            arguments = listOf(
+                                navArgument("videoId") {
+                                    type = NavType.StringType
+                                }
+                            )
+                        ) {
+                            val videoId = it.arguments?.getString("videoId") ?: ""
+                            YouTubeWebViewScreen(videoId = videoId)
+                        }
+
                     }
                 )
             }

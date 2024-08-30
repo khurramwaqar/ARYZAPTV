@@ -38,11 +38,13 @@ data class Episode (
     val id: String,
     val seriesId: String,
     val videoSource: String? = null,
-    val kind: String,
-    val etag: String,
-    val snippet: Snippet,
-    val contentDetails: ContentDetails,
-    val status: Status,
+    val title: String,
+    val description: String,
+    val imagePath: String,
+    val videoYtId: String? = null,
+    val videoDmId: String? = null,
+    val videoViews: String? = null,
+    val videoLength: String? = null,
     @SerializedName("__v")
     val v: Long
 )

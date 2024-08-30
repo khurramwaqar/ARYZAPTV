@@ -299,9 +299,9 @@ private fun SingleEPRowItemImage(
                 },
             model = ImageRequest.Builder(LocalContext.current)
                 .crossfade(true)
-                .data(movie.snippet.thumbnails.medium.url)
+                .data(movie.imagePath)
                 .build(),
-            contentDescription = "movie poster of ${movie.snippet.title}",
+            contentDescription = "movie poster of ${movie.title}",
             contentScale = ContentScale.Crop
         )
         if (showIndexOverImage) {
@@ -335,7 +335,7 @@ private fun SingleEPRowItemText(
             label = "",
         )
         Text(
-            text = movie.snippet.title,
+            text = movie.title,
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.SemiBold
             ),

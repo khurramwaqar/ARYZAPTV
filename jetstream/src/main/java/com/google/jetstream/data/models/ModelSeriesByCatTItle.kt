@@ -22,10 +22,6 @@ data class SeriesN (
     val logo: String? = null,
     val day: String? = null,
     val time: String? = null,
-    val ageRatingId: String? = null,
-    val genreId: List<String>? = null,
-    val categoryId: List<String>? = null,
-    val appId: List<String>? = null,
     val status: String? = null,
     val geoPolicy: String? = null,
     val adsManager: String? = null,
@@ -33,8 +29,7 @@ data class SeriesN (
     val publishedAt: String? = null,
     val position: Long? = null,
     val v: Long? = null,
-    val categoryIdInfo: List<CategoryIdInfo>? = null,
-    val geoPolicyInfo: List<GeoPolicyInfo>? = null
+    val isDM: Boolean? = null
 )
 
 data class CategoryIdInfo (

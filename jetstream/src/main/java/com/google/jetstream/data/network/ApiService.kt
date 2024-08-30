@@ -3,6 +3,7 @@ package com.google.jetstream.data.network
 import com.google.jetstream.data.models.ModelCategories
 import com.google.jetstream.data.models.ModelEpisode
 import com.google.jetstream.data.models.ModelSeriesByCatTitle
+import com.google.jetstream.data.models.SeriesN
 import com.google.jetstream.data.models.SeriesSingle
 import com.google.jetstream.data.models.ZapHome
 import okhttp3.OkHttpClient
@@ -23,6 +24,9 @@ interface ApiService {
 
     @GET("series/{id}") // Replace with your actual API endpoint
     suspend fun getSingleSeries(@Path("id") id: String): SeriesSingle
+
+    @GET("series/{id}") // Replace with your actual API endpoint
+    suspend fun getSingleSeriesN(@Path("id") id: String): SeriesSingle
 
     @GET("series/byCatID/{id}") // Replace with your actual API endpoint
     suspend fun getSeriesByCatName(@Path("id") id: String): ModelSeriesByCatTitle

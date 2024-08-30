@@ -44,10 +44,11 @@ enum class Screens(
     SeriesDetails(listOf(SeriesDetailScreen.SeriesIdBundleKey)),
     Dashboard,
     VideoPlayer,
-    ZAPVideoPayer(listOf("userPath")),
+    ZAPVideoPayer(listOf(ZAPVideoPlayerScreen.ZPlayerBundleId)),
     Login,
     Signup,
-    ZHomeScreen;
+    ZHomeScreen,
+    YTWebView(listOf("videoId"));
 
     operator fun invoke(): String {
         val argList = StringBuilder()

@@ -281,7 +281,7 @@ fun OutlinedCardExample(
         modifier = modifier,
     ) {
         Text(
-            text = episode.snippet.title,
+            text = episode.title,
             modifier = Modifier
                 .padding(16.dp),
             textAlign = TextAlign.Center,

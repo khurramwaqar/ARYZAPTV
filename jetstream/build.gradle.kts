@@ -151,12 +151,14 @@ dependencies {
     implementation ("androidx.media3:media3-ui:1.0.0")
     implementation ("androidx.media3:media3-extractor:1.0.0")
     implementation ("androidx.media3:media3-exoplayer-hls:1.0.0")
+    implementation ("androidx.media3:media3-exoplayer-ima:1.4.1")
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx:22.1.0") // Use the latest version
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("io.realm.kotlin:library-base:1.11.0")
+    implementation ("androidx.webkit:webkit:1.7.0")
 
 
 }
